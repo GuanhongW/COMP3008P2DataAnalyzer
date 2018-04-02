@@ -1,0 +1,8 @@
+.idea/
+*.iml
+out/
+.DS*
+jquery*
+bootstrap*
+test/
+target/
