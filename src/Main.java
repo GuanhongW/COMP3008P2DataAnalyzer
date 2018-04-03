@@ -70,7 +70,26 @@ public class Main {
                     userRemeData.setUserip(userFullData.get(i).getData1());
                     break;
                 case "START":
+                    userNewData = new UserNewData();
+                    userRemeData = new UserRemeData();
                     start_time = userFullData.get(i).getDateTime();
+                    time_consume = 0;
+                    if (remedatalist.size()>1) {
+                        if (userFullData.get(i).getUserid().equals(remedatalist.get(remedatalist.size() - 1).getUserid())) {
+                            for (int j = 0; j < remedatalist.size(); j++) {
+                                if (remedatalist.get(j).getUserid().equals(userFullData.get(i).getUserid())) {
+                                    remedatalist.remove(remedatalist.get(j));
+                                    --j;
+                                }
+                            }
+                            for (int j = 0; j < newdatalist.size(); j++) {
+                                if (newdatalist.get(j).getUserid().equals(userFullData.get(i).getUserid())) {
+                                    newdatalist.remove(newdatalist.get(j));
+                                    --j;
+                                }
+                            }
+                        }
+                    }
                     break;
 //                case "REQUESTPASS":
 //                    try {
@@ -89,6 +108,10 @@ public class Main {
                 case "SETSCHEME":
                     userRemeData.setUserid(userFullData.get(i).getUserid());
                     userRemeData.setScheme(userFullData.get(i).getData1());
+                    if (userFullData.get(i).getData1().equals(userFullData.get(i-2).getData1())){
+                        break;
+                    }
+                    start_time = userFullData.get(i).getDateTime();
                     break;
                 case "CONFIRM":
                     if (userFullData.get(i-1).getAction().equals("RESULT")){
@@ -96,7 +119,7 @@ public class Main {
                     }
                     try {
                         time_consume = (int) (userFullData.get(i).getDateTime().getTime() - start_time.getTime()) / 1000;
-                    } catch (NullPointerException e) {
+                    } catch (Exception e) {
                         System.out.printf("Missing start tag at line: %d\n", userFullData.get(i).getLinenum() + 1);
                         break;
                     }
@@ -105,7 +128,7 @@ public class Main {
                     remedatalist.add(userRemeData);
 
                     userRemeData = new UserRemeData();
-                    start_time = userFullData.get(i).getDateTime();
+                    start_time = null;
                     time_consume = 0;
                     break;
                 case "VERIFY":
@@ -165,6 +188,7 @@ public class Main {
                     }
                     for (int j=0; j<remedatalist.size(); j++){
                         if (remedatalist.get(j).getUserid().equals(userFullData.get(i).getUserid())){
+                            System.out.println(i);
                             remedatalist.get(j).setFinished(true);
                         }
                     }
