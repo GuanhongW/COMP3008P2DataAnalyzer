@@ -7,32 +7,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
+/*
+    Main function of the data analyzer
+ */
 
 public class Main {
 
-//    private static ArrayList<UserNewData> combineData (ArrayList<UserNewData> datalist) {
-//        ArrayList<UserNewData> combined_list = new ArrayList<>();
-//        //set of uid and index of the index in combined_data
-//        Hashtable<String, Integer> uid_set = new Hashtable<>();
-//        int index = 0;
-//        for (UserNewData data : datalist) {
-//            if (!uid_set.containsKey(data.getUserid())) {
-//                //first time see the uid(aka the list does not contain the object with the same uid)
-//                uid_set.put(data.getUserid(), index++);
-//                combined_list.add(data);
-//            } else {
-//                //not first time see the uid
-//                //add all data together
-//                combined_list.get(uid_set.get(data.getUserid())).addTotalLogin(data.getTotal_login());
-//                combined_list.get(uid_set.get(data.getUserid())).addFailLogin(data.getFail_login());
-//                combined_list.get(uid_set.get(data.getUserid())).addFailTime(data.getFail_time_taken());
-//                combined_list.get(uid_set.get(data.getUserid())).addSuccessLogin(data.getSuccess_login());
-//                combined_list.get(uid_set.get(data.getUserid())).addSuccessTime(data.getSuccess_time_taken());
-//            }
-//        }
-//        return combined_list;
-//    }
-
+    private static ArrayList<UserNewData> combineData (ArrayList<UserNewData> datalist) {
+        ArrayList<UserNewData> combined_list = new ArrayList<>();
+        //set of uid and index of the index in combined_data
+        Hashtable<String, Integer> uid_set = new Hashtable<>();
+        int index = 0;
+        for (UserNewData data : datalist) {
+            if (!uid_set.containsKey(data.getUserid())) {
+                //first time see the uid(aka the list does not contain the object with the same uid)
+                uid_set.put(data.getUserid(), index++);
+                combined_list.add(data);
+            } else {
+                //not first time see the uid
+                //add all data together
+                combined_list.get(uid_set.get(data.getUserid())).addTotalLogin(data.getTotal_login());
+                combined_list.get(uid_set.get(data.getUserid())).addFailLogin(data.getFail_login());
+                combined_list.get(uid_set.get(data.getUserid())).addFailTime(data.getFail_time_taken());
+                combined_list.get(uid_set.get(data.getUserid())).addSuccessLogin(data.getSuccess_login());
+                combined_list.get(uid_set.get(data.getUserid())).addSuccessTime(data.getSuccess_time_taken());
+            }
+        }
+        return combined_list;
+    }
 
 
     public static void main(String[] args) throws IOException {
@@ -268,11 +270,16 @@ public class Main {
                 newdatalistFin.add(newdatalist.get(i));
             }
         }
+
+//        ArrayList<UserNewData> combineList = new ArrayList<>();
+//        combineList = combineData(newdatalistFin);
+
         //write data to file
         FileIO.writeRemeFile("output_reme.csv", remedatalist);
         FileIO.writeFile("output_text.csv", newdatalist);
         FileIO.writeRemeFile("output_remeFin.csv", remedatalistFin);
         FileIO.writeFile("output_textFin.csv", newdatalistFin);
+        //FileIO.writeFile("output_com.csv", combineList);
     System.out.println(remedatalist);
 
 

@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/*
+    The file IO: Read and write the csv file
+    Read: read file line by line. And new a Object called UserFullData
+    Write: Write to the file.
+ */
+
 public class FileIO {
     public static ArrayList<UserFullData> readData(String filename) {
         //set time format

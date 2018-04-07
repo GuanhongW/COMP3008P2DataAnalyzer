@@ -1,5 +1,9 @@
 package bean;
 
+/*
+    The Object of UserFullData
+    UserFullData means the data from the Logging file. One line one data.
+ */
 import java.util.Date;
 
 public class UserFullData {

@@ -1,5 +1,10 @@
 package bean;
 
+/*
+    The Object of UserNewData
+    UserNewData means the data of the data of the user confirme the password (For example, the scheme and the time)
+ */
+
 public class UserNewData {
     //map to generated file
     private String userid;

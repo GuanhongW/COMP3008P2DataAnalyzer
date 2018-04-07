@@ -1,5 +1,10 @@
 package bean;
 
+
+/*
+    The Object of UserRemeData
+    UserRemeData means the data of the data of the user remember the password (For example, the scheme and the time)
+ */
 public class UserRemeData {
     //map to generated file
     private String userid;
